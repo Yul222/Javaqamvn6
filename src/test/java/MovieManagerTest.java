@@ -53,4 +53,37 @@ public class MovieManagerTest {
         assertArrayEquals(expected, manager.findAll());
         assertArrayEquals(expected, manager.findLast());
     }
+    @Test
+    void shouldFindLastMoviesWhenLessThanLimit() {
+        manager = new MovieManager(5);
+        manager.addMovie("Фильм 1");
+        manager.addMovie("Фильм 2");
+        manager.addMovie("Фильм 3");
+
+        String[] expected = {"Фильм 3", "Фильм 2", "Фильм 1"};
+        assertArrayEquals(expected, manager.findLast());
+    }
+    @Test
+    void shouldFindLastMoviesWhenMoreThanLimit() {
+        manager = new MovieManager(3);
+        manager.addMovie("Фильм 1");
+        manager.addMovie("Фильм 2");
+        manager.addMovie("Фильм 3");
+        manager.addMovie("Фильм 4");
+        manager.addMovie("Фильм 5");
+        manager.addMovie("Фильм 6");
+
+        String[] expected = {"Фильм 6", "Фильм 5", "Фильм 4"};
+        assertArrayEquals(expected, manager.findLast());
+    }
+    @Test
+    void shouldFindLastMoviesWhenEqualToLimit() {
+        manager = new MovieManager(3);
+        manager.addMovie("Фильм 1");
+        manager.addMovie("Фильм 2");
+        manager.addMovie("Фильм 3");
+
+        String[] expected = {"Фильм 3", "Фильм 2", "Фильм 1"};
+        assertArrayEquals(expected, manager.findLast());
+    }
 }
